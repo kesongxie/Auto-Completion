@@ -400,11 +400,87 @@ bool dictionaryTriePredictCompletionTest(string fileUsed){
     std::ifstream file(freqDictFileName);
     if(file.is_open()){
         Utils::load_dict(dictTrie, file);
-        std::vector<std::string> vectors = dictTrie.predictCompletions("kn", 1);
-        std:: cout << vectors.size() << std::endl;
-    }
-    
+        std::string prefix = "";
+        unsigned int limit = 0;
+        //Case 1: Invalid Prefix Input
+        std::cout << "Case 1: Invalid Prefix Input" << std::endl;
+        prefix = "kn*";
+        limit = 5;
+        std::cout << "Prefix entered: " << prefix << std::endl;
+        std::cout << "Limit entered: " << limit << std::endl;
+        std::vector<std::string> emptyVector = dictTrie.predictCompletions(prefix, limit);
+        if(emptyVector.size() > 0){
+            std::cout << "DictionaryTrie::predictCompletions,eExpected to return 0 word, but got words" << std::endl;
+            return false;
+        }else{
+            std::cout << "Invalid prefix test passed" << std::endl;
+        }
+        std::cout << "End Test Case 1\n" << std::endl;
+
+        //Case 2: Limit Constraint
+        std::cout << "Case 2: Limit Constraint" << std::endl;
+        prefix = "b";
+        limit = 2;
+        std::cout << "Prefix entered: " << prefix << std::endl;
+        std::cout << "Limit entered: " << limit << std::endl;
+        std::vector<std::string> limitVector = dictTrie.predictCompletions(prefix, limit);
+        if(limitVector.size() > limit){
+            std::cout << "DictionaryTrie::predictCompletions, expected to return at most "<< limit << " words, but got a result with more than " << limit << " words" << std::endl;
+            return false;
+        }else{
+            std::cout << "Limit constraint test passed" << std::endl;
+        }
+        std::cout << "End Test Case 2\n" << std::endl;
         
+        
+        
+        //Case 3: Frequency Prioritize
+        std::cout << "Case 3: Frequency Prioritize" << std::endl;
+        prefix = "b";
+        limit = 5;
+        std::cout << "Prefix entered: " << prefix << std::endl;
+        std::cout << "Limit entered: " << limit << std::endl;
+
+        std::vector<std::string> prioritizeVector = dictTrie.predictCompletions(prefix, limit);
+        if(prioritizeVector.size() > 0){
+            std::vector<int> frequencyOrder;
+            for(auto word: prioritizeVector){
+                Node* wordNode = dictTrie.getWord(word);
+                frequencyOrder.push_back(wordNode->freq);
+            }
+            
+            for(unsigned int i = 0; i < frequencyOrder.size(); i++){
+                for(unsigned int j = i+1; j < frequencyOrder.size(); j++){
+                    if(frequencyOrder[i] <= frequencyOrder[j]){
+                        std::cout << "DictionaryTrie::predictCompletions, incorrect frequency order" << std::endl;
+                        return false;
+                    }
+                }
+            }
+            std::cout << "Frequency Prioritize test passed" << std::endl;
+        }
+        std::cout << "End Test Case 3\n" << std::endl;
+        
+        //Case 4: Prefix Macthes
+        std::cout << "Case 4: Prefix Macthes" << std::endl;
+        prefix = "ba";
+        limit = 5;
+        std::cout << "Prefix entered: " << prefix << std::endl;
+        std::cout << "Limit entered: " << limit << std::endl;
+        
+        std::vector<std::string> prefixVector = dictTrie.predictCompletions(prefix, limit);
+        for(auto word: prefixVector){
+            size_t prefixPosition = word.find(prefix);
+            if(prefixPosition == std::string::npos){
+                return false;
+            }
+            if(prefixPosition != 0){
+                return false;
+            }
+        }
+        std::cout << "Prefix test passed" << std::endl;
+        std::cout << "End Test Case 4\n" << std::endl;
+    }
     return true;
 }
 
