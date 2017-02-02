@@ -200,7 +200,7 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
         
         std::cout << "All the matched result for the prefix" << std::endl;
         std::cout << "----------------Output------------------" << std::endl;
-        for(int i = 0; i < completionResult.size(); i++){
+        for(unsigned i = 0; i < completionResult.size(); i++){
             std::cout << completionResult[i].first << ": " << completionResult[i].second << std::endl;
         }
         
@@ -217,7 +217,7 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
         
         std::cout << "\nCompletion words after filtered with frequency and limit" << std::endl;
         std::cout << "----------------Output------------------" << std::endl;
-        for(int i = 0; i < words.size(); i++){
+        for(unsigned i = 0; i < words.size(); i++){
             std::cout << words[i] << std::endl;
         }
 
