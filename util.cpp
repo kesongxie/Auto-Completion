@@ -171,10 +171,11 @@ void Utils::load_dict(DictionaryTrie& dict, istream& words)
     string line = "";
     while (1) {
         getline(words, line);
-        if (words.eof())
-            break;
         unsigned int freq = Utils::stripFrequency(line);
         dict.insert(line, freq);
+        if (words.eof())
+            break;
+
     }
 }
 

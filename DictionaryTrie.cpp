@@ -1,6 +1,11 @@
+/**
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors: Kesong Xie, Jor-el Briones, Christine Alvarado
+ */
 #include "util.h"
 #include "DictionaryTrie.h"
 
+/* node for the tenary search tree*/
 Node::Node(char data, bool isWordEnd, unsigned int freq){
     this->data = data;
     this->isWordEnd = isWordEnd;
@@ -26,73 +31,75 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
         return false;
     }
     
-    Node* p = root;
     /*The current tree is empty */
-    if(!p){
+    if(!root){
         root = createNode(word, 0, freq);
-        p = root;
+        Node* p = root;
         for(unsigned int i = 1; i < word.length(); i++){
             p->middle = createNode(word, i, freq);
             p = p->middle;
-            if(i == word.length() - 1){
-                p->isWordEnd = true;
-            }
         }
         return true;
     }
     
     /*The current tree is not empty*/
     unsigned int i = 0;
-    Node* q = NULL;
-    Node* prev = NULL;
-    
+    Node* p = root;
     while(i < word.length()){
         if(p != NULL){
-            prev = p;
             if(word[i] == p->data){
-                if(i == word.length() - 1 && p->isWordEnd){
-                    /*we reach to the last char, and it's already in the tree, update freq to the larger value, and return false*/
+                //check whether this is the ending char
+                if(i == word.length() - 1){
+                    p->freq = std::max(p->freq, freq);
                     if(p->isWordEnd){
-                        p->freq = std::max(freq, p->freq);
+                        //already existed
+                        //update the frequence
+                        return false;
+                    }else{
+                        p->isWordEnd = true; //finish the insertion for existing node
+                        return true;
                     }
-                    p->isWordEnd = true;
-                    return false;
-                }
-                p->isWordEnd = true;
-                p = p->middle;
-                i++;
-                if(p == NULL){
-                    q = createNode(word, i, freq);
-                    prev->middle = q;
+                }else{
+                    //this is not the ending char
                     i++;
+                    if(p->middle == NULL){
+                        p->middle = createNode(word, i, freq);
+                        p = p->middle;
+                        i++;
+                        break;
+                        //finish the middle chain outside this while loop
+                    }else{
+                        p = p->middle;
+                    }
                 }
             }else if(word[i] > p->data){
-                p = p->right;
-                if(p == NULL){
-                    q = createNode(word, i, freq);
-                    prev->right = q;
+                if(p->right == NULL){
+                    p->right = createNode(word, i, freq);
+                    p = p->right;
                     i++;
+                    break;
+                    //finish the middle chain outside this while loop
+                }else{
+                    p = p->right;
                 }
             }else{
-                p = p->left;
-                if(p == NULL){
-                    q = createNode(word, i, freq);
-                    prev->left = q;
+                if(p->left == NULL){
+                    p->left = createNode(word, i, freq);
+                    p = p->left;
                     i++;
+                    break;
+                    //finish the middle chain outside this while loop
+                }else{
+                    p = p->left;
                 }
             }
-        }else{
-            break;
         }
     }
     
     /*complete the middle chain for the left over chars, if the loop breaks early*/
     while(i < word.length()){
-        q->middle = createNode(word, i, freq);
-        q = q->middle;
-        if(i == word.length() - 1){
-            q->isWordEnd = true;
-        }
+        p->middle = createNode(word, i, freq);
+        p = p->middle;
         i++;
     }
     return true;

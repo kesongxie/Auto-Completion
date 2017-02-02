@@ -1,6 +1,6 @@
 /**
- *  CSE 100 PA3 C++ Autocomplete
- *  Authors: Jor-el Briones, Christine Alvarado
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors: Kesong Xie, Jor-el Briones, Christine Alvarado
  */
 
 #ifndef DICTIONARY_HASHTABLE_H

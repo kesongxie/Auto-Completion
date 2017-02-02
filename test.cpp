@@ -1,3 +1,7 @@
+/**
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors: Kesong Xie, Jor-el Briones, Christine Alvarado
+ */
 #include<iostream>
 #include<string>
 #include<algorithm>
@@ -260,16 +264,16 @@ bool dictionaryBSTFindTest(string fileUsed){
 }
 
 
-
 /* Test for DictionaryTrie insert function */
 bool dictionaryTrieInsertTest(string fileUsed){
     DictionaryTrie dictTrie;
     string freqDictFileName = FILE_PREFIX + fileUsed;
-    std::ifstream fileCaseOne(freqDictFileName);
-    if(fileCaseOne.is_open()){
-        Utils::load_dict(dictTrie, fileCaseOne);
+    std::ifstream file(freqDictFileName);
+    if(file.is_open()){
+        Utils::load_dict(dictTrie, file);
         /*now make sure every word in the fileCaseOne does sucessfully insert into the dictionary*/
         string line = "";
+        std::ifstream fileCaseOne(freqDictFileName);
         while (1) {
             getline(fileCaseOne, line);
             if (fileCaseOne.eof())
@@ -286,14 +290,14 @@ bool dictionaryTrieInsertTest(string fileUsed){
         std::cout << "DictionaryTrie::insert function: Exception caught: can't open file: " << freqDictFileName <<std::endl;
         return false;
     }
-    
+
     //re-insert repeating words
-    std::ifstream freqDictFileNameCaseTwo(freqDictFileName);
-    if(freqDictFileNameCaseTwo.is_open()){
+    std::ifstream fileCaseTwo(freqDictFileName);
+    if(fileCaseTwo.is_open()){
         string line = "";
         while (1) {
-            getline(freqDictFileNameCaseTwo, line);
-            if (freqDictFileNameCaseTwo.eof())
+            getline(fileCaseTwo, line);
+            if (fileCaseTwo.eof())
                 break;
             std::size_t found = line.find(" ");
             if (found!=std::string::npos){
@@ -320,7 +324,7 @@ bool dictionaryTrieInsertTest(string fileUsed){
     freqTestDictTrie.insert("facebook", 99);
     freqTestDictTrie.insert("slack", 1);
     freqTestDictTrie.insert("apple", 1);
-   ;
+    
     if(freqTestDictTrie.getWord("google")->freq != 99 || freqTestDictTrie.getWord("microsoft")->freq != 99
        || freqTestDictTrie.getWord("facebook")->freq != 99 || freqTestDictTrie.getWord("slack")->freq != 4 || freqTestDictTrie.getWord("apple")->freq != 7
        ){

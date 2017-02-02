@@ -1,3 +1,7 @@
+/**
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors: Kesong Xie, Jor-el Briones, Christine Alvarado
+ */
 #include "util.h"
 #include "DictionaryHashtable.h"
 
