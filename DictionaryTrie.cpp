@@ -210,7 +210,7 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
                 words.push_back(word.first);
             }
         }else{
-            for(int i = 0; i < num_completions; i++){
+            for(unsigned int i = 0; i < num_completions; i++){
                 words.push_back(completionResult[i].first);
             }
         }
