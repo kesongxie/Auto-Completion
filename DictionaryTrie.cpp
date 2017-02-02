@@ -4,6 +4,7 @@
  */
 #include "util.h"
 #include "DictionaryTrie.h"
+#include <regex>
 
 /* node for the tenary search tree*/
 Node::Node(char data, bool isWordEnd, unsigned int freq){
@@ -117,7 +118,6 @@ Node* DictionaryTrie::getWord(std::string word) const{
     if(word.empty() || root == NULL){
         return NULL;
     }
-    
     Node* p = root;
     unsigned int i = 0;
     while(i < word.length()){
@@ -154,6 +154,74 @@ Node* DictionaryTrie::getWord(std::string word) const{
 std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, unsigned int num_completions)
 {
     std::vector<std::string> words;
+
+    //validate prefix
+    //out put "Invalid Input. Please retry with correct input" if prefix is invalid
+    std::regex e ("[^a-zA-Z0-9 ]");
+    if(prefix.empty() || std::regex_search(prefix.begin(), prefix.end(), e)){
+        std::cout << "Invalid Input. Please retry with correct input" << std::endl;
+        return words;
+    }
+    
+    //the prefix is valid
+    std::vector<std::pair<std::string, int>> completionResult;
+    Node* prev = NULL;
+    Node* p = root;
+    unsigned int i = 0;
+    while(i < prefix.length()){
+        if(p != NULL){
+            if(prefix[i] == p->data){
+                prev = p;
+                p = p->middle;
+                i++;
+            }else if(prefix[i] > p->data){
+                p = p->right;
+            }else{
+                p = p->left;
+            }
+        }else{
+            prev = NULL;
+            break;
+        }
+    }
+    
+    
+    if(prev != NULL){
+        if(prev->isWordEnd){
+            //add the prefix itself to the completionResult
+            completionResult.push_back(std::pair<std::string, int>(prefix, prev->freq));
+        }
+
+        inOrderTraversalAux(prev->middle, prefix, completionResult);
+        //sort the words based on the frequency
+        std::sort(completionResult.begin(), completionResult.end(), [](const std::pair<std::string,int> &left, const std::pair<std::string,int> &right) {
+            return left.second > right.second;
+        });
+        
+        std::cout << "All the matched result for the prefix" << std::endl;
+        std::cout << "----------------Output------------------" << std::endl;
+        for(int i = 0; i < completionResult.size(); i++){
+            std::cout << completionResult[i].first << ": " << completionResult[i].second << std::endl;
+        }
+        
+        if(completionResult.size() < num_completions){
+            //return all the completion results
+            for(auto word : completionResult){
+                words.push_back(word.first);
+            }
+        }else{
+            for(int i = 0; i < num_completions; i++){
+                words.push_back(completionResult[i].first);
+            }
+        }
+        
+        std::cout << "\nCompletion words after filtered with frequency and limit" << std::endl;
+        std::cout << "----------------Output------------------" << std::endl;
+        for(int i = 0; i < words.size(); i++){
+            std::cout << words[i] << std::endl;
+        }
+
+    }
     return words;
 }
 
@@ -181,17 +249,25 @@ Node* DictionaryTrie::createNode(std::string word, unsigned int index, unsigned 
     return new Node(word[index], isWordEnd, frequence);
 }
 
-std::vector<std::string> DictionaryTrie::inOrderTraversal(){
-    std::vector<std::string> words;
+std::vector<std::pair<std::string, int>> DictionaryTrie::inOrderTraversal(){
+    std::vector<std::pair<std::string, int>> words;
     inOrderTraversalAux(root, "", words);
     return words;
 }
 
-void DictionaryTrie::inOrderTraversalAux(Node* node, std::string prefix, std::vector<std::string> & words){
+/*
+ std::sort(v.begin(), v.end(), [](const std::pair<int,int> &left, const std::pair<int,int> &right) {
+ return left.second < right.second;
+ });
+
+ */
+
+void DictionaryTrie::inOrderTraversalAux(Node* node, std::string prefix, std::vector<std::pair<std::string, int>> & words){
     if(node != NULL){
         inOrderTraversalAux(node->left, prefix, words);
         if(node->isWordEnd){
-            words.push_back(prefix+node->data);
+            std::pair<std::string, int> pair(prefix+node->data, node->freq);
+            words.push_back(pair);
         }
         /*The node->data belongs to part of the middle subtree*/
         inOrderTraversalAux(node->middle, prefix + node->data, words);

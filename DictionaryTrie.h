@@ -67,10 +67,10 @@ public:
     /* Destructor */
     ~DictionaryTrie();
     
-    std::vector<std::string> inOrderTraversal();
     
     Node* getWord(std::string word) const;
 
+    std::vector<std::pair<std::string, int>> inOrderTraversal();
     
 private:
     Node* root;
@@ -81,7 +81,7 @@ private:
     Node* createNode(std::string word, unsigned int index, unsigned freq);
     
     /*in order traversal */
-    void inOrderTraversalAux(Node* node, std::string prefix, std::vector<std::string> & words);
+    void inOrderTraversalAux(Node* node, std::string prefix, std::vector<std::pair<std::string, int>> & words);
 
     /*post order deallocate memory*/   
     void postOrderDeleteAux(Node* node);
