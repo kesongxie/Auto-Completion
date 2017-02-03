@@ -7,7 +7,6 @@
 #include<algorithm>
 #include<fstream>
 #include<set>
-#include<regex>
 #include<cstdlib>
 #include "util.h"
 #include "DictionaryTrie.h"
@@ -43,62 +42,55 @@ int main(int argc, char** argv)
     
     string freqDictFileName = "smalldictionary.txt";
     
-
+    if(dictionaryBSTInsertTest(freqDictFileName)){
+        std::cout << "DictionaryBST::insert(): Test Passed" << std::endl;
+    }else{
+        std::cout << "DictionaryBST::insert(): Test Failed" << std::endl;
+        return -1;
+    }
+    
+    
+    if(dictionaryBSTFindTest(freqDictFileName)){
+        std::cout << "DictionaryBST::find(): Test Passed" << std::endl;
+    }else{
+        std::cout << "DictionaryBST::find(): Test Failed" << std::endl;
+        return -1;
+    }
+    
+    if(dictionaryHashTableInsertTest(freqDictFileName)){
+        std::cout << "DictionaryHashtable::insert(): Test Passed" << std::endl;
+    }else{
+        std::cout << "DictionaryHashtable::insert(): Test Failed" << std::endl;
+        return -1;
+    }
+    
+    if(dictionaryHashTableFindTest(freqDictFileName)){
+        std::cout << "DictionaryHashtable::find(): Test Passed" << std::endl;
+    }else{
+        std::cout << "DictionaryHashtable::find(): Test Failed" << std::endl;
+        return -1;
+    }
     
 
+    if(dictionaryTrieInsertTest(freqDictFileName)){
+        std::cout << "DictionaryTrie::insert(): Test Passed" << std::endl;
+    }else{
+        std::cout << "DictionaryTrie::insert(): Test Failed" << std::endl;
+        return -1;
+    }
     
-    
-    
-    
-//    if(dictionaryBSTInsertTest(freqDictFileName)){
-//        std::cout << "DictionaryBST::insert(): Test Passed" << std::endl;
-//    }else{
-//        std::cout << "DictionaryBST::insert(): Test Failed" << std::endl;
-//        return -1;
-//    }
-//    
-//    
-//    if(dictionaryBSTFindTest(freqDictFileName)){
-//        std::cout << "DictionaryBST::find(): Test Passed" << std::endl;
-//    }else{
-//        std::cout << "DictionaryBST::find(): Test Failed" << std::endl;
-//        return -1;
-//    }
-//    
-//    if(dictionaryHashTableInsertTest(freqDictFileName)){
-//        std::cout << "DictionaryHashtable::insert(): Test Passed" << std::endl;
-//    }else{
-//        std::cout << "DictionaryHashtable::insert(): Test Failed" << std::endl;
-//        return -1;
-//    }
-//    
-//    if(dictionaryHashTableFindTest(freqDictFileName)){
-//        std::cout << "DictionaryHashtable::find(): Test Passed" << std::endl;
-//    }else{
-//        std::cout << "DictionaryHashtable::find(): Test Failed" << std::endl;
-//        return -1;
-//    }
-//    
-//
-//    if(dictionaryTrieInsertTest(freqDictFileName)){
-//        std::cout << "DictionaryTrie::insert(): Test Passed" << std::endl;
-//    }else{
-//        std::cout << "DictionaryTrie::insert(): Test Failed" << std::endl;
-//        return -1;
-//    }
-//    
-//    if(dictionaryTrieFindTest(freqDictFileName)){
-//        std::cout << "DictionaryTrie::find(): Test Passed" << std::endl;
-//    }else{
-//        std::cout << "DictionaryTrie::find(): Test Failed" << std::endl;
-//        return -1;
-//    }
+    if(dictionaryTrieFindTest(freqDictFileName)){
+        std::cout << "DictionaryTrie::find(): Test Passed" << std::endl;
+    }else{
+        std::cout << "DictionaryTrie::find(): Test Failed" << std::endl;
+        return -1;
+    }
     
     
     if(dictionaryTriePredictCompletionTest(freqDictFileName)){
         std::cout << "DictionaryTrie::predictCompletions(): Test Passed" << std::endl;
     }else{
-        std::cout << "DictionaryTrie::find(): Test Failed" << std::endl;
+        std::cout << "ictionaryTrie::predictCompletions(): Test Failed" << std::endl;
         return -1;
     }
     
@@ -483,5 +475,7 @@ bool dictionaryTriePredictCompletionTest(string fileUsed){
     }
     return true;
 }
+
+
 
 
