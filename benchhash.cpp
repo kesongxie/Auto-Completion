@@ -42,10 +42,13 @@ void generatePerformanceReport(unsigned int num_words, std::string dictfile, uns
 
 int main(int argc, char** argv){
     
-    
+    if (argc < 3) {
+        std::cerr << "Missing arguments for "<< (*argv)<<", expected four arguments: min_size, step_size, num_iterations, dictfile" << std::endl;
+        return 1;
+    }
+
     std::string dictfile = *(++argv);
     unsigned int num_words = std::stoi(*(++argv));
-    
     unsigned int tableSize = 2 * num_words;
 
     std::cout << "---------------------Hash Function Performance Report---------------------" << std::endl;
