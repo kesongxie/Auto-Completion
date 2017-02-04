@@ -43,7 +43,7 @@ void generatePerformanceReport(unsigned int num_words, std::string dictfile, uns
 int main(int argc, char** argv){
     
     if (argc < 3) {
-        std::cerr << "Missing arguments for "<< (*argv)<<", expected four arguments: min_size, step_size, num_iterations, dictfile" << std::endl;
+        std::cerr << "Missing arguments for "<< (*argv)<<", expected two arguments: dictfile, num_words" << std::endl;
         return 1;
     }
 
