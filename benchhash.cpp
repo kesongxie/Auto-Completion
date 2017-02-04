@@ -64,7 +64,7 @@ int main(int argc, char** argv){
  */
 unsigned int hashOne(std::string key, unsigned int tableSize){
     int hash = 7;
-    for (int i = 0; i < key.length(); i++) {
+    for (unsigned int i = 0; i < key.length(); i++) {
         hash = hash * 31 + key[i];
     }
     return hash % tableSize;
@@ -78,7 +78,7 @@ unsigned int hashOne(std::string key, unsigned int tableSize){
  */
 unsigned int hashTwo(std::string key, unsigned int tableSize){
     unsigned int val = 0;
-    for(int i = 0; i < key.length(); i++) {
+    for(unsigned int i = 0; i < key.length(); i++) {
         val += (unsigned int)(key[i]); // cast each character of key to unsigned int
     }
     return val % tableSize;
