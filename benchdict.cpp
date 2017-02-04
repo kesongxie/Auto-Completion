@@ -77,7 +77,7 @@ int generateDictionaryTrieRuntimeAnalysis(char** argv){
     std::ifstream file(dictfile);
     if(file.is_open()){
         std::cout << "Benchmarking DictionaryTrie" << std::endl;
-        for(int i = 0; i < num_iterations; i++){
+        for(unsigned int i = 0; i < num_iterations; i++){
             //reset ifstream to the begining
             file.clear();
             file.seekg(0, std::ios::beg);
@@ -151,7 +151,7 @@ int generateDictionaryHashTableRuntimeAnalysis(char** argv){
     std::ifstream file(dictfile);
     if(file.is_open()){
         std::cout << "Benchmarking DictionaryHashtable" << std::endl;
-        for(int i = 0; i < num_iterations; i++){
+        for(unsigned int i = 0; i < num_iterations; i++){
             //reset ifstream to the begining
             file.clear();
             file.seekg(0, std::ios::beg);
@@ -224,7 +224,7 @@ int generateDictionaryBSTRuntimeAnalysis(char** argv){
     std::ifstream file(dictfile);
     if(file.is_open()){
         std::cout << "Benchmarking DictionaryBST" << std::endl;
-        for(int i = 0; i < num_iterations; i++){
+        for(unsigned int i = 0; i < num_iterations; i++){
             //reset ifstream to the begining
             file.clear();
             file.seekg(0, std::ios::beg);
