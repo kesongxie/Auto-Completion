@@ -157,7 +157,7 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 
     //validate prefix
     //out put "Invalid Input. Please retry with correct input" if prefix is invalid
-    for(int i = 0; i < prefix.length(); i++){
+    for(unsigned int i = 0; i < prefix.length(); i++){
         if( (prefix[i] < 'a' || prefix[i] > 'z') && (prefix[i] < 'A' || prefix[i] > 'Z') && (prefix[i] < '0' || prefix[i] > '9') && prefix[i] != ' '){
             std::cout << "Invalid Input. Please retry with correct input" << std::endl;
             return words;
