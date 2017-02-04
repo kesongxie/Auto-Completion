@@ -223,7 +223,7 @@ int generateDictionaryBSTRuntimeAnalysis(char** argv){
     //benchmarking DictionaryHashtable
     std::ifstream file(dictfile);
     if(file.is_open()){
-        std::cout << "Benchmarking DictionaryHashtable" << std::endl;
+        std::cout << "Benchmarking DictionaryBST" << std::endl;
         for(int i = 0; i < num_iterations; i++){
             //reset ifstream to the begining
             file.clear();
