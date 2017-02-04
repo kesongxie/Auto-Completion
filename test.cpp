@@ -16,25 +16,46 @@
 using namespace std;
 
 string FILE_PREFIX = "/Users/KesongXie/Developer/Auto-Complete-PA2/Auto-Complete-PA2/";
-/* Test for DictionaryBST insert function */
+/* Test for DictionaryBST insert function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryBSTInsertTest(string fileUsed);
 
-/* Test for DictionaryBST find function */
+/* Test for DictionaryBST find function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryBSTFindTest(string fileUsed);
 
-/* Test for DictionaryHashtable insert function */
+/* Test for DictionaryHashtable insert function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryHashTableInsertTest(string fileUsed);
 
-/* Test for DictionaryHashtable find function */
+/* Test for DictionaryHashtable find function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryHashTableFindTest(string fileUsed);
 
-/* Test for DictionaryTrie insert function */
+/* Test for DictionaryTrie insert function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryTrieInsertTest(string fileUsed);
 
-/* Test for DictionaryTrie find function */
+/* Test for DictionaryTrie find function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryTrieFindTest(string fileUsed);
 
-/* Test for DictionaryTrie predictCompletions function */
+/* Test for DictionaryTrie predictCompletions function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryTriePredictCompletionTest(string fileUsed);
 
 int main(int argc, char** argv)
@@ -100,7 +121,10 @@ int main(int argc, char** argv)
 
 
 
-/* Test for DictionaryHashtable insert function */
+/* Test for DictionaryHashtable insert function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryHashTableInsertTest(string fileUsed){
     DictionaryHashtable dictHashTable;
     string freqDictFileName = FILE_PREFIX + fileUsed;
@@ -148,7 +172,10 @@ bool dictionaryHashTableInsertTest(string fileUsed){
     return true;
 }
 
-/* Test for DictionaryHashtable find function */
+/* Test for DictionaryHashtable find function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryHashTableFindTest(string fileUsed){
     DictionaryHashtable dictHashTable;
     string freqDictFileName = FILE_PREFIX + fileUsed;
@@ -189,7 +216,10 @@ bool dictionaryHashTableFindTest(string fileUsed){
 
 
 
-/* Test for DictionaryBST insert function */
+/* Test for DictionaryBST insert function  
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryBSTInsertTest(string fileUsed){
     DictionaryBST dictBST;
     string freqDictFileName = FILE_PREFIX + fileUsed;
@@ -238,7 +268,10 @@ bool dictionaryBSTInsertTest(string fileUsed){
     return true;
 }
 
-/* Test for DictionaryBST find function */
+/* Test for DictionaryBST find function 
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryBSTFindTest(string fileUsed){
     DictionaryBST dictBST;
     string freqDictFileName = FILE_PREFIX + fileUsed;
@@ -277,7 +310,10 @@ bool dictionaryBSTFindTest(string fileUsed){
 }
 
 
-/* Test for DictionaryTrie insert function */
+/* Test for DictionaryTrie insert function
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryTrieInsertTest(string fileUsed){
     DictionaryTrie dictTrie;
     string freqDictFileName = FILE_PREFIX + fileUsed;
@@ -347,7 +383,10 @@ bool dictionaryTrieInsertTest(string fileUsed){
     return true;
 }
 
-/* Test for DictionaryTrie find function */
+/* Test for DictionaryTrie find function 
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryTrieFindTest(string fileUsed){
     DictionaryTrie dictTrie;
     string freqDictFileName = FILE_PREFIX + fileUsed;
@@ -385,7 +424,10 @@ bool dictionaryTrieFindTest(string fileUsed){
 }
 
 
-/* Test for DictionaryTrie predictCompletions function */
+/* Test for DictionaryTrie predictCompletions function 
+ * @param string fileUsed: the file path for the file dictionary
+ * @return bool: return true if test passed, false otherwise
+ */
 bool dictionaryTriePredictCompletionTest(string fileUsed){
     DictionaryTrie dictTrie;
     string freqDictFileName = FILE_PREFIX + fileUsed;

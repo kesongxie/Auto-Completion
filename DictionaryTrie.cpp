@@ -231,10 +231,11 @@ DictionaryTrie::~DictionaryTrie(){
 }
 
 
-/* createNode is a convenient helper function for creating a node
+/* createNode: a convenient helper function for creating a node
  * @param word: the word that the node created from
  * @param index: the index for the char in the word, that is used for the data for the node
  * @param freq: the frequence for the word, this value is used only when the char at the given index is the last char of the word
+ * @return Node*: the node being created:
  */
 Node* DictionaryTrie::createNode(std::string word, unsigned int index, unsigned freq){
     /*default false if this is not the last char*/
@@ -249,6 +250,11 @@ Node* DictionaryTrie::createNode(std::string word, unsigned int index, unsigned 
     return new Node(word[index], isWordEnd, frequence);
 }
 
+
+/*
+ * inOrderTraversal: in order traversal
+ * @return std::vector<std::pair<std::string, int>>: all the words with its frequency
+ */
 std::vector<std::pair<std::string, int>> DictionaryTrie::inOrderTraversal(){
     std::vector<std::pair<std::string, int>> words;
     inOrderTraversalAux(root, "", words);
@@ -256,12 +262,12 @@ std::vector<std::pair<std::string, int>> DictionaryTrie::inOrderTraversal(){
 }
 
 /*
- std::sort(v.begin(), v.end(), [](const std::pair<int,int> &left, const std::pair<int,int> &right) {
- return left.second < right.second;
- });
-
+ * inOrderTraversalAux: in order traversal, output results to words argument
+ * @param Node* node: the starting node for post order traversal
+ * @param std::string prefix: prefix for this given node
+ * @param std::vector<std::pair<std::string, int>> & words: the container for saving output results 
+ * @return void
  */
-
 void DictionaryTrie::inOrderTraversalAux(Node* node, std::string prefix, std::vector<std::pair<std::string, int>> & words){
     if(node != NULL){
         inOrderTraversalAux(node->left, prefix, words);
@@ -277,8 +283,10 @@ void DictionaryTrie::inOrderTraversalAux(Node* node, std::string prefix, std::ve
 
 
 /*
-* post order deallocate memory for nodes	 
-**/
+ * postOrderDeleteAux: post order deallocate memory for nodes
+ * @param Node* node: the starting node for post order traversal deletion
+ * @return void
+ */
 void DictionaryTrie::postOrderDeleteAux(Node* node){
     if(node != NULL){
         postOrderDeleteAux(node->left);

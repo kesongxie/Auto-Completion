@@ -83,7 +83,11 @@ private:
     /*in order traversal */
     void inOrderTraversalAux(Node* node, std::string prefix, std::vector<std::pair<std::string, int>> & words);
 
-    /*post order deallocate memory*/   
+    /*
+     * post order deallocate memory for nodes
+     * @param Node* node: the starting node for post order traversal deletion
+     * @return void
+     */
     void postOrderDeleteAux(Node* node);
 };
 

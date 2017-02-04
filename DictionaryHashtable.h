@@ -38,10 +38,6 @@ public:
     /* return the ending iterator */
     std::unordered_set<std::string>::iterator end();
     
-    
-    
-    
-    
 private:
     /* Add your own data members and methods here*/
     std::unordered_set<std::string> dict;
