@@ -26,3 +26,14 @@ bool DictionaryHashtable::find(std::string word) const
 DictionaryHashtable::~DictionaryHashtable(){
     dict.clear();
 }
+
+/* return the begining iterator */
+std::unordered_set<std::string>::iterator DictionaryHashtable::begin(){
+    return dict.begin();
+}
+
+/* return the ending iterator */
+std::unordered_set<std::string>::iterator DictionaryHashtable::end(){
+    return dict.end();
+}
+
