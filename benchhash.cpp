@@ -101,7 +101,7 @@ void generatePerformanceReport(unsigned int num_words, std::string dictfile, uns
         std::map<unsigned int, unsigned int> hit;
         std::map<unsigned int, unsigned int> slotHit;
         //initialize the hit map
-        for(int i = 0; i < tableSize; i++){
+        for(unsigned int i = 0; i < tableSize; i++){
             slotHit[i] = 0;
         }
         
